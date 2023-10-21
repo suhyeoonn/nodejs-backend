@@ -1,5 +1,22 @@
 {
   "dependencies": {
-    "lodash": "github:lodash/lodash#4.17.21"
-  }
+    "lodash": "github:lodash/lodash#4.17.21",
+    "prettier": "^3.0.3"
+  },
+  "name": "npm-install-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "prehello": "echo 'pre hello Node.js'",
+    "hello": "echo 'hello Node.js'",
+    "posthello": "echo 'post hello Node.js'",
+    "start": "echo 'start Node.js'",
+    "stop": "echo 'stop Node.js'",
+    "restart": "echo 'restart Node.js'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
