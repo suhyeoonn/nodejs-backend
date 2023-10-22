@@ -1,11 +1,7 @@
 const DB = [];
 
 function register(user) {
-  return saveDB(user, function (user) {
-    return sendEmail(user, function (user) {
-      return getResult(user);
-    });
-  });
+  return saveDB(user, (user) => sendEmail(user, getResult));
 }
 
 function saveDB(user, callback) {
