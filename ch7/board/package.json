@@ -13,6 +13,7 @@
   "dependencies": {
     "express": "^4.17.3",
     "express-handlebars": "^6.0.3",
+    "lodash": "^4.17.21",
     "mongodb": "^4.13.0",
     "nodemon": "^3.0.1"
   }
