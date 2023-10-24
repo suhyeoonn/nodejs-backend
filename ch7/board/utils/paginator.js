@@ -4,13 +4,16 @@ const PAGE_LIST_SIZE = 10;
 module.exports = ({ totalCount, page, perPage = 10 }) => {
   const PER_PAGE = perPage;
   const totalPage = Math.ceil(totalCount / PER_PAGE);
+  //   console.log("totalCount", totalCount);
+  //   console.log("totalPage", totalPage);
 
   let quotient = parseInt(page / PAGE_LIST_SIZE);
   if (page % PAGE_LIST_SIZE === 0) {
     quotient -= 1;
   }
-  const startPage = quotient * PAGE_LIST_SIZE + 1;
+  const startPage = quotient * PAGE_LIST_SIZE + 1; //1
 
+  // 10 < 1 ? 10 : 1
   const endPage =
     startPage + PAGE_LIST_SIZE - 1 < totalPage
       ? startPage + PAGE_LIST_SIZE - 1
