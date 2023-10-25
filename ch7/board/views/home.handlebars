@@ -41,21 +41,21 @@
 
 <div>
     {{#with paginator}}
-    <a href="/?page=1">&lt;&lt;</a>
+    <a href="/?page=1&search={{@root.search}}">&lt;&lt;</a>
     {{#if hasPrev}}
-        <a href="/?page={{prevPage}}">&lt;</a>
+        <a href="/?page={{prevPage}}&search={{@root.search}}">&lt;</a>
     {{/if}}
     {{#each pageList}}
         {{#if (eq . @root.paginator.page)}}
         <a>{{.}}</a>
         {{else}}
-        <a href="/?page={{.}}">{{.}}</a>
+        <a href="/?page={{.}}&search={{@root.search}}">{{.}}</a>
         {{/if}}
     {{/each}}
     {{#if hasNext}}
-        <a href="/?page={{nextPage}}">&gt;</a>
+        <a href="/?page={{nextPage}}&search={{@root.search}}">&gt;</a>
     {{/if}}
-     <a href="/?page={{lastPage}}">&gt;&gt;</a>
+     <a href="/?page={{lastPage}}&search={{@root.search}}">&gt;&gt;</a>
      {{/with}}
 </div>
 <p>{{message}}</p>
