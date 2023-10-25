@@ -47,6 +47,24 @@ app.get("/detail/:id", async (req, res) => {
   });
 });
 
+app.post("/check-password", async (req, res) => {
+  const { id, password } = req.body;
+  const post = await postService.getPostByIdAndPassword(collection, {
+    id,
+    password,
+  });
+
+  if (!post) {
+    return res.status(404).json({ isExist: false });
+  } else {
+    return res.json({ isExist: true });
+  }
+});
+
+app.get("/modify/:id", async (req, res) => {
+  res.render("write", { title: "테스트 게시판" });
+});
+
 let collection;
 app.listen(3000, async () => {
   console.log("Server started");

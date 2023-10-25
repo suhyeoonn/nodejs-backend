@@ -34,8 +34,16 @@ async function getDetailPost(collection, id) {
   return result;
 }
 
+async function getPostByIdAndPassword(collection, { id, password }) {
+  return await collection.findOne({
+    _id: ObjectId(id),
+    password: password,
+  });
+}
+
 module.exports = {
   list,
   writePost,
   getDetailPost,
+  getPostByIdAndPassword,
 };

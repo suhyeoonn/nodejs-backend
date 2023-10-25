@@ -10,7 +10,7 @@
     {{hits}}
     | 작성일시 :
     {{dateString createdDt}}
-    <button onclick="modifyPost({{id}})">수정</button>
+    <button onclick="modifyPost()">수정</button>
     <button onclick="deletePost()">삭제</button>
   </div>
 
@@ -63,4 +63,32 @@
     <a href="/">목록으로</a>
   </div>
 </footer>
-<script src="./script.js"></script>
+{{! prettier-ignore }}
+<script>
+async function modifyPost() {
+  const password = prompt("패스워드를 입력하세요");
+  if (!password) {
+    return;
+  }
+
+  try {
+    const result = await fetch("/check-password", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: '{{post._id}}', password }),
+    });
+    const data = await result.json();
+    if (!data.isExist) {
+      alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+    location.href = `/modify/{{post._id}}`;
+  } catch (err) {
+    console.error(err);
+  }
+}
+async function deletePost() {}
+
+</script>
