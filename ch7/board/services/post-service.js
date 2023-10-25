@@ -41,9 +41,24 @@ async function getPostByIdAndPassword(collection, { id, password }) {
   });
 }
 
+async function getPostById(collection, id) {
+  return await collection.findOne({ _id: ObjectId(id) }, projectionOption);
+}
+
+async function updatePost(collection, post) {
+  const toUpdatePost = {
+    $set: {
+      ...post,
+    },
+  };
+  return await collection.updateOne({ _id: ObjectId(post.id) }, toUpdatePost);
+}
+
 module.exports = {
   list,
   writePost,
   getDetailPost,
   getPostByIdAndPassword,
+  getPostById,
+  updatePost,
 };

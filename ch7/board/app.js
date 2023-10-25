@@ -30,7 +30,7 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/write", (req, res) => {
-  res.render("write", { title: "테스트 게시판" });
+  res.render("write", { title: "테스트 게시판", mode: "create" });
 });
 
 app.post("/write", async (req, res) => {
@@ -62,7 +62,21 @@ app.post("/check-password", async (req, res) => {
 });
 
 app.get("/modify/:id", async (req, res) => {
-  res.render("write", { title: "테스트 게시판" });
+  const post = await postService.getPostById(collection, req.params.id);
+  res.render("write", { title: "테스트 게시판", mode: "modify", post });
+});
+
+app.post("/modify", async (req, res) => {
+  const { id, title, writer, content } = req.body;
+  const result = await postService.updatePost(collection, {
+    id,
+    title,
+    writer,
+    content,
+    createdDt: new Date().toISOString(),
+  });
+  console.log(result);
+  res.redirect(`/detail/${id}`);
 });
 
 let collection;
