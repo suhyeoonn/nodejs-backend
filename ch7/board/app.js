@@ -79,6 +79,22 @@ app.post("/modify", async (req, res) => {
   res.redirect(`/detail/${id}`);
 });
 
+app.delete("/delete", async (req, res) => {
+  const { id, password } = req.body;
+  try {
+    const isSuccess = await postService.deletePost(collection, id, password);
+    console.log(isSuccess);
+    if (!isSuccess) {
+      console.log("삭제 실패");
+      return res.json({ isSuccess: false });
+    }
+    return res.json({ isSuccess: true });
+  } catch (err) {
+    console.error(err);
+    return res.json({ isSuccess: false });
+  }
+});
+
 let collection;
 app.listen(3000, async () => {
   console.log("Server started");

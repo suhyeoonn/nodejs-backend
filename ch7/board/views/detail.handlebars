@@ -89,6 +89,28 @@ async function modifyPost() {
     console.error(err);
   }
 }
-async function deletePost() {}
+async function deletePost() {
+  const password = prompt('삭제하려면 패스워드를 입력해주세요')
+  if(!password) {
+    return
+  }
+  try {
+    const result = await fetch(`/delete`, {
+      method:'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({id: '{{post._id}}', password})
+    })
+    const data = await result.json()
+    if(!data.isSuccess) {
+      alert('삭제에 실패했습니다. 패스워드를 확인해주세요')
+      return
+    }
+    document.location = '/'
+  } catch(err) {
+    console.error(err)
+  }
+}
 
 </script>

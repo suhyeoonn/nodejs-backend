@@ -54,6 +54,15 @@ async function updatePost(collection, post) {
   return await collection.updateOne({ _id: ObjectId(post.id) }, toUpdatePost);
 }
 
+async function deletePost(collection, id, password) {
+  const result = await collection.deleteOne({
+    _id: ObjectId(id),
+    password: password,
+  });
+  console.log(result);
+  return result.deletedCount === 1;
+}
+
 module.exports = {
   list,
   writePost,
@@ -61,4 +70,5 @@ module.exports = {
   getPostByIdAndPassword,
   getPostById,
   updatePost,
+  deletePost,
 };
