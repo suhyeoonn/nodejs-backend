@@ -17,47 +17,51 @@
   <div>
     <pre>{{content}}</pre>
   </div>
+
+  <section>
+    <div>
+      <h3>{{lengthOfList comments}}개의 댓글이 있습니다.</h3>
+    </div>
+    <form action="/write-comment" method="post">
+      <input type="hidden" name="id" value="{{_id}}" />
+      <div>
+        <div>
+          <input type="text" name="name" placeholder="이름" />
+          <input type="password" name="password" placeholder="비밀번호" />
+        </div>
+        <div>
+          <textarea
+            name="comment"
+            id=""
+            cols="40"
+            rows="3"
+            placeholder="댓글을 입력해주세요."
+          ></textarea>
+          <br /><br /><button>댓글 쓰기</button>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <section>
+    {{#each comments}}
+      <div>
+        <div>
+          작성자:
+          <b>{{name}}</b>
+        </div>
+        <div>
+          작성일시:
+          {{dateString createdDt}}
+          <button onclick="deleteComment('{{idx}}')">삭제</button>
+        </div>
+      </div>
+      <div>
+        <pre>{{comment}}</pre>
+      </div>
+    {{/each}}
+  </section>
 {{/with}}
-<section>
-  <div>
-    <h3>3개의 댓글이 있습니다.</h3>
-  </div>
-  <form action="/write-comment" method="post">
-    <div>
-      <div>
-        <input type="text" name="name" placeholder="이름" />
-        <input type="password" name="password" placeholder="비밀번호" />
-      </div>
-      <div>
-        <textarea
-          name="comment"
-          id=""
-          cols="40"
-          rows="3"
-          placeholder="댓글을 입력해주세요."
-        ></textarea>
-        <br /><br /><button>댓글 쓰기</button>
-      </div>
-    </div>
-  </form>
-</section>
-
-<section>
-  <div>
-    <div>
-      작성자:
-      <b>댓글 작성자</b>
-    </div>
-    <div>
-      작성일시: 2022-01-01 00:00:00
-      <button onclick="deleteComment('1')">삭제</button>
-    </div>
-  </div>
-  <div>
-    <pre>{{comment}}</pre>
-  </div>
-</section>
-
 <footer>
   <div>
     <a href="/">목록으로</a>

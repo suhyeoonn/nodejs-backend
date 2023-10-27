@@ -68,7 +68,7 @@ app.get("/modify/:id", async (req, res) => {
 
 app.post("/modify", async (req, res) => {
   const { id, title, writer, content } = req.body;
-  const result = await postService.updatePost(collection, {
+  const result = await postService.updatePost(collection, id, {
     id,
     title,
     writer,
@@ -93,6 +93,33 @@ app.delete("/delete", async (req, res) => {
     console.error(err);
     return res.json({ isSuccess: false });
   }
+});
+
+app.post("/write-comment", async (req, res) => {
+  const { id, name, password, comment } = req.body;
+  const post = await postService.getPostById(collection, id);
+  console.log(post);
+  if (post.comments) {
+    post.comments.push({
+      idx: post.comments.length + 1,
+      name,
+      password,
+      comment,
+      createdDt: new Date().toISOString(),
+    });
+  } else {
+    post.comments = [
+      {
+        idx: 1,
+        name,
+        password,
+        comment,
+        createdDt: new Date().toISOString(),
+      },
+    ];
+  }
+  postService.updatePost(collection, id, post);
+  return res.redirect(`/detail/${id}`);
 });
 
 let collection;

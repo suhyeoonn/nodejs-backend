@@ -45,13 +45,13 @@ async function getPostById(collection, id) {
   return await collection.findOne({ _id: ObjectId(id) }, projectionOption);
 }
 
-async function updatePost(collection, post) {
+async function updatePost(collection, id, post) {
   const toUpdatePost = {
     $set: {
       ...post,
     },
   };
-  return await collection.updateOne({ _id: ObjectId(post.id) }, toUpdatePost);
+  return await collection.updateOne({ _id: ObjectId(id) }, toUpdatePost);
 }
 
 async function deletePost(collection, id, password) {
