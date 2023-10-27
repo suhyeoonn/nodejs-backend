@@ -1,0 +1,30 @@
+@server = http://localhost:3000
+
+### all blog
+GET {{server}}/blog
+
+### create post
+POST {{server}}/blog
+Content-Type: application/json
+
+{
+    "title": "hi",
+    "content": "hello",
+    "name": "elly"
+}
+
+### get blog 
+GET {{server}}/blog/1
+
+### delete blog
+DELETE {{server}}/blog/1
+
+### update blog
+PUT {{server}}/blog/2
+Content-Type: application/json
+
+{
+    "title": "hi edit",
+    "content": "hello edit",
+    "name": "ellyyyy"
+}
