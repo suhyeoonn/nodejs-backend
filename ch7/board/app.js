@@ -98,7 +98,6 @@ app.delete("/delete", async (req, res) => {
 app.post("/write-comment", async (req, res) => {
   const { id, name, password, comment } = req.body;
   const post = await postService.getPostById(collection, id);
-  console.log(post);
   if (post.comments) {
     post.comments.push({
       idx: post.comments.length + 1,
@@ -120,6 +119,23 @@ app.post("/write-comment", async (req, res) => {
   }
   postService.updatePost(collection, id, post);
   return res.redirect(`/detail/${id}`);
+});
+
+app.delete("/delete-comment", async (req, res) => {
+  const { id, idx, password } = req.body;
+  const post = await postService.getComments(collection, id, idx, password);
+
+  if (!post) {
+    return res.json({ isSuccess: false });
+  }
+
+  console.log(post.comments);
+  post.comments = post.comments.filter(
+    (comment) => comment.idx !== parseInt(idx)
+  );
+  await postService.updatePost(collection, id, post);
+
+  return res.json({ isSuccess: true });
 });
 
 let collection;

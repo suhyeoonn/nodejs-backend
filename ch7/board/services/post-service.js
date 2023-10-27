@@ -63,6 +63,16 @@ async function deletePost(collection, id, password) {
   return result.deletedCount === 1;
 }
 
+async function getComments(collection, id, idx, password) {
+  return await collection.findOne(
+    {
+      _id: ObjectId(id),
+      comments: { $elemMatch: { idx: parseInt(idx), password } },
+    },
+    projectionOption
+  );
+}
+
 module.exports = {
   list,
   writePost,
@@ -71,4 +81,5 @@ module.exports = {
   getPostById,
   updatePost,
   deletePost,
+  getComments,
 };

@@ -117,4 +117,28 @@ async function deletePost() {
   }
 }
 
+async function deleteComment(idx) {
+  const password = prompt('패스워드를 입력하세요')
+  if (!password) {
+    return
+  }
+
+  const result = await fetch('/delete-comment', {
+    method: 'DELETE',
+    headers: {
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify({id: '{{post._id}}', idx, password})
+  })
+
+  const data = await result.json()
+  if (!data.isSuccess) {
+    alert(`삭제에 실패했습니다. 패스워드를 확인해주세요`)
+    return
+  }
+
+  alert('삭제 성공!')
+  document.location.reload()
+}
+
 </script>
