@@ -29,3 +29,24 @@ Content-Type: application/json
 
 ### Guard test
 GET {{server}}/test-guard
+
+### login3
+POST {{server}}/login3
+Content-Type: application/json
+
+{
+    "email": "bbb@abc.com",
+    "password": "bbb"
+}
+
+### login3 wrong password
+POST {{server}}/login3
+Content-Type: application/json
+
+{
+    "email": "bbb@abc.com",
+    "password": "bb"
+}
+
+### auth test
+GET {{server}}/test-guard2
