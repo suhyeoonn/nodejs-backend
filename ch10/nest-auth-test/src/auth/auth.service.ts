@@ -29,4 +29,19 @@ export class AuthService {
       throw new HttpException('서버 에러', 500);
     }
   }
+
+  async validateUser(email: string, password: string) {
+    const user = await this.userService.getUser(email);
+    if (!user) {
+      return null;
+    }
+
+    const { password: hashedPassword, ...userInfo } = user;
+    console.log(hashedPassword, password);
+    if (bcrypt.compareSync(password, hashedPassword)) {
+      console.log(userInfo);
+      return userInfo;
+    }
+    return null;
+  }
 }

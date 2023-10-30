@@ -4,7 +4,28 @@ POST {{server}}/register
 Content-Type: application/json
 
 {
-    "email": "aaa@abc.com",
-    "password": "aaa",
-    "username": "aaa"
+    "email": "bbb@abc.com",
+    "password": "bbb",
+    "username": "bbb"
 }
+
+### login
+POST {{server}}/login
+Content-Type: application/json
+
+{
+    "email": "aaa@abc.com",
+    "password": "aaa"
+}
+
+### login2
+POST {{server}}/login2
+Content-Type: application/json
+
+{
+    "email": "bbb@abc.com",
+    "password": "bbb"
+}
+
+### Guard test
+GET {{server}}/test-guard
