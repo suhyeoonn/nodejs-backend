@@ -22,6 +22,6 @@ export class AppController {
   @UseInterceptors(FileInterceptor('file', multerOption))
   fileUpload(@UploadedFile() file: Express.Multer.File) {
     console.log(file);
-    return 'File Upload';
+    return `${file.originalname} File upload`;
   }
 }
