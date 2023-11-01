@@ -8,7 +8,7 @@ export class User {
   @Column({ unique: true })
   email: string;
 
-  @Column()
+  @Column({ nullable: true })
   password: string;
 
   @Column()
@@ -16,4 +16,7 @@ export class User {
 
   @Column({ default: true })
   createdDt: Date = new Date();
+
+  @Column({ nullable: true })
+  providerId: string;
 }

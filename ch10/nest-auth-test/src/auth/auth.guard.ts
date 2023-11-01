@@ -34,9 +34,9 @@ export class LoginGard implements CanActivate {
 export class LocalAuthGuard extends AuthGuard('local') {
   async canActivate(context: any): Promise<boolean> {
     const result = (await super.canActivate(context)) as boolean;
-    // 로컬 스트래티지 실행
+    // super.canActivate()는 LocalStrategy의 validate() 메서드를 실행
     const request = context.switchToHttp().getRequest();
-    await super.logIn(request); // 세션 저장
+    await super.logIn(request); // SessionSerializer의 serializeUser()를 실행하며 세션 저장
     return result;
   }
 }
@@ -46,5 +46,15 @@ export class AuthenticatedGuard implements CanActivate {
   canActivate(context: ExecutionContext): boolean {
     const request = context.switchToHttp().getRequest();
     return request.isAuthenticated(); // 세션에서 정보를 읽어서 인증 확인
+  }
+}
+
+@Injectable()
+export class GoogleAuthGuard extends AuthGuard('google') {
+  async canActivate(context: any): Promise<boolean> {
+    const result = (await super.canActivate(context)) as boolean;
+    const request = context.switchToHttp().getRequest();
+    await super.logIn(request); // 세션 적용
+    return result;
   }
 }
